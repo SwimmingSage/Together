@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Together</title>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link rel='stylesheet' href='/stylesheets/newgoal.css' />
+    <link rel='stylesheet' href='/stylesheets/base.css' />
+    <script src="https://use.fontawesome.com/9ee4ba5902.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/newgoalpage.js"></script>
+    <script src="/javascripts/logoutajax.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div id="navbar">
+        <a href="/loginhome" id="together">Together</a>
+        <ul class="navbarButtons">
+          <li class="levelinfo" id="level">Lvl: <%= user.level %></li>
+          <li class="levelinfo" id="points"><%= user.points +" / "+ user.points_to_levelup+ " pts" %></li>
+          <a href="/yourgoals">
+            <li class="navButton">Your Goals</li>
+          </a>
+          <a href="/newgoal">
+            <li class="navButton" id="currentpagenav">New Goal</li>
+          </a>
+          <a href="/joingoal">
+            <li class="navButton">Join Goal</li>
+          </a>
+          <button class="navButtonButton" id="logout">
+            <li class="navButton">Logout</li>
+          </button>
+        </ul>
+    </div>
+
+    <!-- New Goals -->
+    <div id="newgoalbody">
+      <div id="loseweight">
+        <h1>Lose Weight</h1>
+      </div>
+      <div id="breakhabit">
+        <h1>Break a Habit</h1>
+      </div>
+      <div id="formhabit">
+        <h1>Form a Habit</h1>
+      </div>
+      <div id="learnskill">
+        <h1>Learn a Skill</h1>
+      </div>
+      <div id="fitnessgoal">
+        <h1>Fitness Goal</h1>
+      </div>
+      <div id="othergoal">
+        <h1>Other Goal</h1>
+      </div>
+    </div>
+
+    <!-- out of goals popup -->
+    <div class="outofgoals">
+      <div class="outofgoalspopupblock">
+        <span class="closebox">&times;</span>
+        <h1>Sorry, but you have run out of goals!</h1>
+        <p>Delete some of your goals to make room for more <a href="editgoal">here</a></p>
+      </div>
+    </div>
+
+    <!-- Lose Weight Goal Form -->
+    <div class="goalcreationfirst" id="loseweightgoal">
+      <ul>
+        <li><button id="loseweightback">Go back</button></li>
+        <li><input type="text" placeholder="Goal Name" name="loseweightgoalname" class="loseweightinfo" id="loseweightgoalname" maxlength="20"></li>
+        <li><input type="number" placeholder="Current Weight (in pounds)" name="currentweight" class="loseweightinfo" id="currentweight" min="0" max="400"></li>
+        <li><input type="number" placeholder="Weight you want to lose (in pounds)" name="loseweightamount" class="loseweightinfo" id="loseweightamount" min="0" max="100"></li>
+        <li class="privateinfo">- Your current weight and weight that you wish to lose will be kept private</li>
+        <li class="error" id="unfilledsections">- Please fill out all sections</li>
+        <li class="error" id="invalidweight">- Please enter a valid weight</li>
+        <li class="error" id="invalidweightloss">- Please enter a valid weight to lose</li>
+        <li class="error" id="goalnameused1">- Sorry, you have already given that goal name to another goal, please choose another</li>
+        <li class="error" id="badsymbols1">- Please only include letters, numbers, ', -, and spaces in your goal name</li>
+        <li class="error" id="goalstartwithletter1">- Please make the first character of your goal a letter</li>
+        <li><button id="loseweightaddtasks">Continue</button></li>
+      </ul>
+    </div>
+
+    <!-- All Other goal form -->
+    <div class="goalcreationfirst" id="othergoalstart">
+      <ul>
+        <li><button id="othergoalback">Go back</button></li>
+        <li><input type="text" placeholder="Goal Name" name="goalname" class="goalinfo" id="goalname" maxlength="20"></li>
+        <li class="error" id="unfilledgoalname">- Please fill out a name for your goal</li>
+        <li class="error" id="goalnameused2">- Sorry, you have already given that goal name to another goal, please choose another</li>
+        <li class="error" id="goalnameused2">- Sorry, you have already given that goal name to another goal, please choose another</li>
+        <li class="error" id="badsymbols2">- Please only include letters, numbers, ', - , and spaces in your goal name</li>
+        <li class="error" id="goalstartwithletter2">- Please make the first character of your goal a letter</li>
+        <li><button id="goaladdtasks">Continue</button></li>
+      </ul>
+    </div>
+
+
+    <!-- Add Tasks form -->
+    <!-- Not using actual form as some input checks I want to do on the front end before doing post request -->
+    <div class="addtasks">
+
+      <div class="addtasksheading">
+        <h1>Make the daily tasks for your goal</h1>
+      </div>
+
+      <div class="taskrulessection">
+        <ul>
+          <li>These are the tasks that you will aim to do daily for your goal, which in turn will earn you points!</li>
+          <br><br><br>
+          <li>- Each task can be worth anywhere from 1 to 4 points</li>
+          <li>- The total number of points you can use among all of your tasks is 17</li>
+          <br><br><br>
+          <li>P.S. Don't worry if you can't come up with 8 tasks now, or make one you might not want in a week, as you can always edit your tasks later!</li>
+      </div>
+
+      <div class="entertaskssection">
+        <ul>
+          <li><button id="dailytasksback">Go back</button></li>
+
+
+          <li><input type="text" placeholder="Daily Task #1" name="dailytask1" class="dailytaskname" id="dailytask1" maxlength="30"><input type="number" placeholder="Pts" name="dailytask1points" class="dailytaskpoint" id="dailytask1points"></li>
+
+          <li><input type="text" placeholder="Daily Task #2" name="dailytask2" class="dailytaskname" id="dailytask2" maxlength="30"><input type="number" placeholder="Pts" name="dailytask2points" class="dailytaskpoint" id="dailytask2points"></li>
+
+          <li><input type="text" placeholder="Daily Task #3" name="dailytask3" class="dailytaskname" id="dailytask3" maxlength="30"><input type="number" placeholder="Pts" name="dailytask3points" class="dailytaskpoint" id="dailytask3points"></li>
+
+          <li><input type="text" placeholder="Daily Task #4" name="dailytask4" class="dailytaskname" id="dailytask4" maxlength="30"><input type="number" placeholder="Pts" name="dailytask4points" class="dailytaskpoint" id="dailytask4points"></li>
+
+          <li><input type="text" placeholder="Daily Task #5" name="dailytask5" class="dailytaskname" id="dailytask5" maxlength="30"><input type="number" placeholder="Pts" name="dailytask5points" class="dailytaskpoint" id="dailytask5points"></li>
+
+          <li><input type="text" placeholder="Daily Task #6" name="dailytask6" class="dailytaskname" id="dailytask6" maxlength="30"><input type="number" placeholder="Pts" name="dailytask6points" class="dailytaskpoint" id="dailytask6points"></li>
+
+          <li><input type="text" placeholder="Daily Task #7" name="dailytask7" class="dailytaskname" id="dailytask7" maxlength="30"><input type="number" placeholder="Pts" name="dailytask7points" class="dailytaskpoint" id="dailytask7points"></li>
+
+          <li><input type="text" placeholder="Daily Task #8" name="dailytask8" class="dailytaskname" id="dailytask8" maxlength="30"><input type="number" placeholder="Pts" name="dailytask8points" class="dailytaskpoint" id="dailytask8points"></li>
+
+
+          <li class="error" id="invalidtasks">- Please fill out at least one task and corresponding point value</li>
+          <li class="error" id="taskandptsneeded">- Each task must have a pt value and vice versa</li>
+          <li class="error" id="invalidtotalpoints">- The total number of points should be 17 at most</li>
+          <li class="error" id="invalidpointstask">- The most points a single task can give is 4, and the least is 1</li>
+          <li class="error" id="invalidpointstasknumber">- You currently have <span id="currentpoints"></span> pts in use</li>
+          <li class="error" id="twotaskssamename">- Sorry, two of your tasks appear to have the same name, could you please rename one?</li>
+          <li class="error" id="goaltasksamename">- Sorry, but you seem to have given your goal's name to one of your tasks as well, could you please rename it?</li>
+          <li class="error" id="taskcontainsbadcharacter">- Please only include letters, numbers, ', -, and spaces in your task name</li>
+          <li class="error" id="taskstartwithletter">- Please make the first character for each of your tasks a letter</li>
+          <li><button id="submitgoal">Submit</button></li>
+        </ul>
+    </div>
+  </div>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

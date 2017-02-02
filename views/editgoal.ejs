@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Together</title>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link rel='stylesheet' href='/stylesheets/editgoal.css' />
+    <link rel='stylesheet' href='/stylesheets/base.css' />
+    <script src="https://use.fontawesome.com/9ee4ba5902.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/editgoal.js"></script>
+    <script src="/javascripts/logoutajax.js"></script>
+  </head>
+
+    <body>
+
+    <div id="navbar">
+        <a href="/loginhome" id="together">Together</a>
+        <ul class="navbarButtons">
+          <li class="levelinfo" id="level">Lvl: <span id="user-level"><%= user.level %></span></li>
+          <li class="levelinfo" id="points"><span id="user-points"><%= user.points %></span> / <span id="user-points-to-level"><%=user.points_to_levelup%></span> pts</li>
+          <a href="/yourgoals">
+            <li class="navButton" id="currentpagenav">Your Goals</li>
+          </a>
+          <a href="/newgoal">
+            <li class="navButton">New Goal</li>
+          </a>
+          <a href="/joingoal">
+            <li class="navButton">Join Goal</li>
+          </a>
+          <button class="navButtonButton" id="logout">
+            <li class="navButton">Logout</li>
+          </button>
+        </ul>
+    </div>
+
+
+    <!-- Displays Goal list to left -->
+    <div id="goallistleft">
+      <ul>
+        <li id="goalsheader">Your Goals:</li>
+        <% if(user.goals.length === 0) { %>
+          <li id="nogoals"><%= "Currently no goals" %></li>
+        <% } else { %>
+          <% for(i = 0; i < user.goals.length; i++) { %>
+            <li class="goallist" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>"> <%= user.goals[i].goal_name %></li>
+          <% } %>
+        <% } %>
+      </ul>
+    </div>
+
+    <!-- Displays no current goals if relevant -->
+    <% if(user.goals.length === 0) { %>
+      <div id="nogoalsmessage">
+        <p><%= "You currently have no goals to edit. Create one now and" %></p>
+        <a href="/newgoal"><%= "Begin a Journey" %></a>
+      </div>
+    <% } %>
+
+    <!-- Displays standard starting page if no goal selected -->
+    <% if(user.goals.length != 0) { %>
+      <div id="nogoalselected">
+        <p class="nogoallisthead"><%= "Select a goal on the left to edit, or mark as achieved" %></p>
+        <p class="goaldeletioncount">You have <span><%= user.goals_to_delete %></span> goals you can achieve or delete remaining for the day.</p>
+        <p class="nogoallistitem"><%= "By editing a goal, you lose your ability to check off this goal's tasks today." %></p>
+        <p class="nogoallistitem"><%= "This means that if you have not completed any of this goal's tasks yet, your streak will automatically set to 0 that night." %></p>
+        <p class="nogoallistitem"><%= "Please check of any tasks that you have completed before continuing with editing." %></p>
+      </div>
+    <% } %>
+
+    <!-- Displays goals information if relevant -->
+    <% if(user.goals.length != 0) { %>
+      <% for(i = 0; i < user.goals.length; i++) { %>
+        <div class="goalinformation" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>goalinfo">
+          <div id="uppergoalinfoend">
+            <p class="goalnameheading"><%= user.goals[i].goal_name %></p>
+            <% if(user.goals[i].goal_type === "loseweightgoal") { %>
+              <p class="goalstatheading"><span class="boldit">Starting Weight:</span> <%= user.goals[i].current_weight + " lb" %> &nbsp;&nbsp;&nbsp;<span class="boldit">Weight to lose:</span> <%= user.goals[i].weight_to_lose + " lb" %></p>
+            <% } %>
+            <p class="goalstatheading"><span class="boldit">Streak: </span><span id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>streak"><%= user.goals[i].streak + " day(s)" %></span>&nbsp;&nbsp;&nbsp;<i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></p>
+          </div>
+
+          <div class="goalnavbar" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>navbar">
+            <ul>
+              <li class="dailytasksnavbutton">Edit Daily Tasks Below</li>
+            </ul>
+          </div>
+
+          <div class="goaltasks" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>box">
+            <ul class="goalstasksinputs">
+            <% for(x = 0; x < 8; x++) { %>
+              <% if(x < user.goals[i].tasks.length) { %>
+                <li class="existingtask">
+                  <input class="taskname" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>newtask<%= x %>name" value="<%= user.goals[i].tasks[x].name %>" maxlength="30" type="text">&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input class="taskpoints" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>newtask<%= x %>points" value="<%= user.goals[i].tasks[x].points%>" type="number" type="number">
+                </li>
+              <% } else {%>
+                <li class="nonexistingtask">
+                  <input class="taskname" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>newtask<%= x %>name" placeholder="Task Name" maxlength="30">&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input class="taskpoints" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>newtask<%= x %>points" placeholder="Pts" type="number">
+                </li>
+              <% } %>
+            <% } %>
+            </ul>
+            <p class="success">Your edit was successful</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>invalidtasks">- Please fill out at least one task and corresponding point value</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>taskandptsneeded">- Each task must have a pt value and vice versa</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>invalidtotalpoints">- The total number of points should be 17 at most</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>invalidpointstask">- The most points a single task can give is 4, and the least is 1</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>invalidpointstasknumber">- You currently have <span id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>currentpoints"></span> pts in use</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>twotaskssamename">- Sorry, two of your tasks appear to have the same name, could you please rename one?</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>goaltasksamename">- Sorry, but you seem to have given your goal's name to one of your tasks as well, could you please rename it?</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>taskcontainsbadcharacter">- Please only include letters, numbers, ', -, and spaces in your task name</p>
+            <p class="error" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>taskstartwithletter">- Please make the first character for each of your tasks a letter</p>
+            <ul class="optionbuttons">
+              <li class="taskfinalize"><button class="submit">Submit Any Changes</button></li>
+              <li class="goaloptions"><button class="goalachieved">Goal Achieved</button><button class="deletegoal">Delete Goal</button></li>
+            </ul>
+
+          </div>  
+        </div>
+        <% } %>
+    <% } %>
+
+    <!-- out of goals popup -->
+    <div class="useractionpopup" id="editgoalswarning">
+      <div>
+        <span class="closebox">&times;</span>
+        <h1>Caution:</h1>
+        <p>By editing this goal, you lose your ability to check off this goal's tasks today.</p>
+        <p>You therefore will lose your streak if you haven't already checked off any tasks for this goal today</p>
+        <p>Are you sure you want to submit these changes?</p>
+        <button class="continue">Continue</button>
+      </div>
+    </div>
+
+    <div class="useractionpopup" id="deletegoalswarning">
+      <div >
+        <span class="closebox">&times;</span>
+        <h1>Caution:</h1>
+        <p>By deleting this goal you will permanentely remove it.</p>
+        <p>Are you sure you want to delete it?</p>
+        <button class="delete">Delete</button>
+      </div>
+    </div>
+
+    <div class="useractionpopup" id="outofdeletegoalswarning">
+      <div>
+        <h1>Cannot Achieve or Delete any more goals today</h1>
+        <p>It seems you have already achieved or deleted 3 goals today, come back tomorrow to achieve or delete this goal</p>
+        <a href="/yourgoals"><button class="goback">Continue</button></a>
+      </div>
+    </div>
+
+    <div class="useractionpopup" id="achievegoalsmessage">
+      <div>
+        <h1>Congratulations!!!</h1>
+        <p>Great work achieving your goal!</p>
+        <p>Achieving a goal is no small feat and what you have done is extremely impressive.</p>
+        <p>Bask in this moment. You deserve it.</p>
+        <a href="/yourgoals"><button class="return">Continue</button></a>
+      </div>
+    </div>
+
+
+
+
+  </body>
+  
+</html>

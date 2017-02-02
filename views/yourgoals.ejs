@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Together</title>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link rel='stylesheet' href='/stylesheets/yourgoals.css' />
+    <link rel='stylesheet' href='/stylesheets/base.css' />
+    <script src="https://use.fontawesome.com/9ee4ba5902.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/yourgoalspage.js"></script>
+    <script src="/javascripts/logoutajax.js"></script>
+  </head>
+
+    <body>
+
+    <div id="navbar">
+        <a href="/loginhome" id="together">Together</a>
+        <ul class="navbarButtons">
+          <li class="levelinfo" id="level">Lvl: <span id="user-level"><%= user.level %></span></li>
+          <li class="levelinfo" id="points"><span id="user-points"><%= user.points %></span> / <span id="user-points-to-level"><%=user.points_to_levelup%></span> pts</li>
+          <a href="/yourgoals">
+            <li class="navButton" id="currentpagenav">Your Goals</li>
+          </a>
+          <a href="/newgoal">
+            <li class="navButton">New Goal</li>
+          </a>
+          <a href="/joingoal">
+            <li class="navButton">Join Goal</li>
+          </a>
+          <button class="navButtonButton" id="logout">
+            <li class="navButton">Logout</li>
+          </button>
+        </ul>
+    </div>
+
+
+    <!-- Displays Goal list to left -->
+    <div id="goallistleft">
+      <ul>
+        <li id="goalsheader">Your Goals:</li>
+        <% if(user.goals.length === 0) { %>
+          <li id="nogoals"><%= "Currently no goals" %></li>
+        <% } else { %>
+          <% for(i = 0; i < user.goals.length; i++) { %>
+            <li class="goallist" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>"> <%= user.goals[i].goal_name %></li>
+          <% } %>
+        <% } %>
+      </ul>
+    </div>
+
+    <!-- Displays no current goals if relevant -->
+    <% if(user.goals.length === 0) { %>
+      <div id="nogoalsmessage">
+        <p><%= "You currently have no goals listed. Create one now and" %></p>
+        <a href="/newgoal"><%= "Begin a Journey" %></a>
+      </div>
+    <% } %>
+
+    <!-- Displays standard starting page if no goal selected -->
+    <% if(user.goals.length != 0) { %>
+      <div id="nogoalselected">
+        <p class="nogoallisthead"><%= "Select a goal on the left to begin" %></p>
+        <p class="goalcount">You have used <span><%= user.goals.length %> / 8</span> of your goals, make more at <a href="/newgoal"> New Goal </a></p>
+        <p class="nogoallistitem"><%= "- Complete tasks for a goal to earn points" %></p>
+        <p class="nogoallistitem"><%= "- Earn enough points and level up" %></p>
+        <p class="nogoallistitem"><%= "- Complete a task everyday to build a streak for that goal" %></p>
+      </div>
+    <% } %>
+
+    <!-- Displays goals information if relevant -->
+    <% if(user.goals.length != 0) { %>
+      <% for(i = 0; i < user.goals.length; i++) { %>
+        <div class="goalinformation" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>goalinfo">
+          <div id="uppergoalinfoend">
+            <p class="goalnameheading"><%= user.goals[i].goal_name %></p>
+            <% if(user.goals[i].goal_type === "loseweightgoal") { %>
+              <p class="goalstatheading"><span class="boldit">Starting Weight:</span> <%= user.goals[i].current_weight + " lb" %> &nbsp;&nbsp;&nbsp;<span class="boldit">Weight to lose:</span> <%= user.goals[i].weight_to_lose + " lb" %></p>
+            <% } %>
+            <p class="goalstatheading"><span class="boldit">Streak: </span><span id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>streak"><%= user.goals[i].streak + " day(s)" %></span>&nbsp;&nbsp;&nbsp;<i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></p>
+          </div>
+
+          <div class="goalnavbar" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>navbar">
+            <ul>
+              <li class="dailytasksnavbutton">Daily Tasks</li>
+              <li class="othersprogressnavbutton">Other's Progress</li>
+            </ul>
+          </div>
+
+          <div class="goaltasks">
+          <p class="tasktext"></p>
+            <!-- <h1><%= "Daily Tasks:" %></h1> -->
+            <% for(x = 0; x < user.goals[i].tasks.length; x++) { %>
+              <% if(user.goals[i].tasks[x].achieved) { %>
+                <p class="taskdone" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %><%= user.goals[i].tasks[x].name.replace(/[\s']/g,'') %>done"><i class="fa fa-check-square-o fa-lg"></i><%= user.goals[i].tasks[x].name %>&nbsp;&nbsp;&nbsp;&nbsp;(<%= user.goals[i].tasks[x].points %> pts)</p>
+              <% } else{ %>
+                <p class="task" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %><%= user.goals[i].tasks[x].name.replace(/[\s']/g,'') %>"><i class="fa fa-square-o fa-lg" id="icon" aria-hidden="true"></i><%= user.goals[i].tasks[x].name %>&nbsp;&nbsp;&nbsp;&nbsp;(<%= user.goals[i].tasks[x].points %> pts)</p>
+              <% } %>
+            <% } %>
+            <p class="editgoalsoption">Achieve your goal? Want to edit your tasks? <a href = "/editgoal">Go Here</a></p>
+          </div>
+
+          <div class="othersgoals" id="similarto<%= user.goals[i].goal_name.replace(/[\s']/g,'') %>"> <!-- ID irrelevant as of now -->
+            <div class="othergoalheader">
+              <% if(user.goals[i].goal_type === "loseweightgoal") { %>
+                <p><%= "These are the lose weight goals of every other user, click on the plus to see what daily tasks they've achieved today and gain some motivation!" %></p>
+              <% } else if(user.goals[i].goal_type === "breakhabitgoal") { %>
+                <p><%= "These are the break habit goals of every other user, click on the plus to see what daily tasks they've achieved today and gain some motivation!" %></p>
+              <% } else if(user.goals[i].goal_type === "formhabitgoal") { %>
+                <p><%= "These are the form habit goals of every other user, click on the plus to see what daily tasks they've achieved today and gain some motivation!" %></p>
+              <% } else if(user.goals[i].goal_type === "learnskillgoal") { %>
+                <p><%= "These are the learn a skill goals of every other user, click on the plus to see what daily tasks they've achieved today and gain some motivation!" %></p>
+              <% } else if(user.goals[i].goal_type === "fitnessgoal") { %>
+                <p><%= "These are the fitness goals of every other user, click on the plus to see what daily tasks they've achieved today and gain some motivation!" %></p>
+              <% } else if(user.goals[i].goal_type === "uniquegoal") { %>
+                <p><%= "These are the unique goals that have been created by every other user, click on the plus to see what daily tasks they've achieved today and gain some motivation!" %></p>
+              <% } %>
+            </div>
+            <% for(a = 0; a < userlist.length; a++) { %>
+              <% if(userlist[a].username !== user.username) { %>
+                <% for(b = 0; b < userlist[a].goals.length; b++) { %>
+                  <% if(userlist[a].goals[b].goal_type === user.goals[i].goal_type) { %>
+                    <p id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %><%= userlist[a].username.replace(/[\s']/g,'') %><%= userlist[a].goals[b].goal_name.replace(/[\s']/g,'') %>info"><%= userlist[a].firstname %>'s goal to <%= userlist[a].goals[b].goal_name %> <span class="right">Lvl: <%= userlist[a].level %>&nbsp;&nbsp;&nbsp; <%= userlist[a].goals[b].streak %>&nbsp;<i class="fa fa-free-code-camp fa" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-plus" id="othershowmore" aria-hidden="true"></i></span></p>
+                    <!-- Other users tasks -->
+                    <div class="othertasks" id="<%= user.goals[i].goal_name.replace(/[\s']/g,'') %><%= userlist[a].username.replace(/[\s']/g,'') %><%= userlist[a].goals[b].goal_name.replace(/[\s']/g,'') %>tasks">
+                    <% for(c = 0; c < userlist[a].goals[b].tasks.length; c++) { %>
+                      <% if(userlist[a].goals[b].tasks[c].achieved) { %>
+                        <p class="othertaskdone" id="<%= userlist[a].username.replace(/[\s']/g,'') %><%= userlist[a].goals[b].goal_name.replace(/[\s']/g,'') %><%= userlist[a].goals[b].tasks[c].name.replace(/[\s']/g,'') %>done"><i class="fa fa-check-square-o fa-lg"></i><%= userlist[a].goals[b].tasks[c].name %>&nbsp;&nbsp;&nbsp;&nbsp;(<%= userlist[a].goals[b].tasks[c].points %> pts)</p>
+                      <% } else { %>
+                        <p class="othertask" id="<%= userlist[a].username.replace(/[\s']/g,'') %><%= userlist[a].goals[b].goal_name.replace(/[\s']/g,'') %><%= userlist[a].goals[b].tasks[c].name.replace(/[\s']/g,'') %>"><i class="fa fa-square-o fa-lg" aria-hidden="true"></i><%= userlist[a].goals[b].tasks[c].name %>&nbsp;&nbsp;&nbsp;&nbsp;(<%= userlist[a].goals[b].tasks[c].points %> pts)</p>
+                      <% } %>
+                    <% } %>
+                    </div>
+                  <!-- End of other users tasks -->
+                  <% } %>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+
+        </div>
+      <% } %>
+    <% } %>
+
+
+    <div class="useractionpopup" id="levelup">
+      <div>
+        <span class="closebox">&times;</span>
+        <h1>You have levelled up!</h1>
+        <p class="levelinfo">Great work! Now see if you can achieve your way to the next level!</p>
+      </div>
+    </div>
+
+
+  </body>
+  
+</html>
+
+
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link rel='stylesheet' href='/stylesheets/homepage.css' />
+    <link rel='stylesheet' href='/stylesheets/base.css' />
+    <script src="https://use.fontawesome.com/9ee4ba5902.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/homepage.js"></script>
+    <script src="/javascripts/homepageajax.js"></script>
+  </head>
+
+
+    <body>
+
+    <div id="navbar">
+        <a href="/loginhome" id="together">Together</a>
+        <ul class="navbarButtons">
+          <button class="navButtonButton" id="loginstart">
+            <li class="navButton">Login</li>
+          </button>
+          <button class="navButtonButton" id="signupstart">
+            <li class="navButton">Sign up</li>
+          </button>
+        </ul>
+    </div>
+
+    <div id="signupform">
+        <p><i>“The journey of a thousand miles begins with a single step.”</i> <br>- Lao Tzu</p>
+        <ul>
+          <li><input type="text" placeholder="Username" name="username" class="inputinfo" id="inputusername" maxlength="20"></li>
+          <li><input type="text" placeholder="Email" name="email" class="inputinfo" id="inputemail" maxlength="35"></li>
+          <li><input type="text" placeholder="First Name" name="firstname" class="inputinfo" id="inputfirstname" maxlength="20"></li>
+          <li><input type="text" placeholder="Last Name" name="lastname" class="inputinfo" id="inputlastname" maxlength="20"></li>
+          <li><input type="password" placeholder="Password" name="password" class ="inputinfo" id="inputpassword" maxlength="20"></li>
+          <li><input type="password" placeholder="Re-enter Password" name="re-enterpassword" class="inputinfo" id="inputre-enterpassword" maxlength="20"></li>
+          <li class="error" id="notmatchingpassword">- Passwords do not match</li>
+          <li class="error" id="usernamenotunique">- Username is taken, please try another</li>
+          <li class="error" id="emailinuse">- That email already has an account</li>
+          <li class="error" id="fillallsections1">- Please fill out all sections</li>
+          <li class="error" id="invalidemail">- Please enter a valid email</li>
+          <li class="error" id="badsymbols">- Please only include letters, numbers, ', and - in your username (no spaces)</li>
+          <li class="error" id="goalstartwithletter">- Please make the first character of your username a letter</li>
+          <li><button id="signup">Sign Up</button></li>
+        </ul>
+    </div>
+
+    <div id="loginform">
+        <p>Let's continue our progress, shall we?</p>
+        <ul>
+          <li><input type="text" placeholder="Username" name="username" class="inputinfo" id="inputusernamelogin" maxlength="20"></li>
+          <li><input type="password" placeholder="Password" name="password" class ="inputinfo" id="inputpasswordlogin" maxlength="20"></li>
+          <li class="error" id="invalidusernamepassword">- Invalid username or password</li>
+          <li class="error" id="fillallsections2">- Please fill out all sections</li>
+          <li><button id="login">Login</button></li>
+        </ul>
+    </div>
+
+    <div id="homebody">
+      <div id="uppercontent">
+        <h1>Together</h1>
+        <p>Achieving a goal is hard, lets do it <strong>together</strong></p>
+      </div>
+
+      <div id="lowercontent">
+        <table id="missiontable">
+          <tr>
+            <td></td>
+            <td><i class="fa fa-pencil-square-o fa-3x" aria-hidden="true"></i><br><br>Set a goal</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+            <td><i id="arrow" class="fa fa-arrow-down fa-2x" aria-hidden="true"></i></td>
+            <td>
+          </tr>
+
+          <tr>
+            <td>
+            <td><i class="fa fa-users fa-3x" aria-hidden="true"></i><br><br>Join similar individuals on your journey</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+            <td><i id="arrow" class="fa fa-arrow-down fa-2x" aria-hidden="true"></i></td>
+            <td>
+          </tr>
+
+          <tr>
+            <td><i class="fa fa-angle-double-up fa-3x" aria-hidden="true"></i><br><br>Earn points</td>
+            <td><i class="fa fa-level-up fa-3x" aria-hidden="true"></i><br><br>Level up</td>
+            <td><i class="fa fa-fire fa-3x" aria-hidden="true"></i><br><br>Build streaks</td>
+          </tr>
+
+          <tr>
+            <td>
+            <td><i id="arrow" class="fa fa-arrow-down fa-2x" aria-hidden="true"></i></td>
+            <td>
+          </tr>
+
+          <tr>
+            <td>
+            <td><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i><br><br>Achieve your goals. . .</td>
+            <td>
+          </tr>
+          <tr>
+            <td>
+            <td id="bigmessage">Together.</td>
+            <td>
+          </tr>
+
+        </table>
+
+        <h1 id="signuptojoin">Sign up to join today.</h1>
+
+      </div>
+    </div>
+
+
+
+
+  </body>
+</html>

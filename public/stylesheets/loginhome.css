@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans");
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+
+body {
+	background-image: url('../images/mountain-road-small.jpg');
+  	background-size: cover;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+	width: 100%;
+	height: 100vh;
+}
+
+.header {
+    font-family: "Rubik";
+    font-size: 35px;
+    text-align: center;
+    color: #ffc957;
+    margin: auto;
+    margin-top: 90px;
+    background-color: #444444;
+    opacity: 0.88;
+    padding: 10px 5px;
+    width: 900px;
+    border-bottom: solid 5px #ff6624;
+    cursor: default;
+}
+
+.header p {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
+
+#loginhomebody {
+	text-align: center;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+#loginhomebody div {
+	display: inline-block;
+	border-radius: 0px;
+	margin: auto;
+	padding: 30px 30px;
+	background-color: #444444;
+	opacity: 0.92;
+	-webkit-box-shadow: -11px 10px 26px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: -11px 10px 26px 0px rgba(0,0,0,0.75);
+	box-shadow: -11px 10px 26px 0px rgba(0,0,0,0.75);
+}
+
+#loginhomebody div#newgoaldiv {
+	margin-right: 15px; 
+}
+
+#loginhomebody div#yourgoalsdiv {
+	margin-left: 15px; 
+}
+
+#loginhomebody div#joingoaldiv {
+	margin-top: 30px; 
+}
+
+
+#loginhomebody div:hover {
+	opacity: 0.98;
+	transition: 0.2s;
+	cursor: pointer;
+	transform: scale(1.05);
+}
+
+#loginhomebody a div h1 {
+	font-size: 45px;
+	color: #ffa834;
+	font-family: "Rubik";
+	font-weight: bold;
+}
+
+#loginhomebody a div p {
+	font-size: 25px;
+	color: #ffc957;
+	font-family: "Rubik";
+	font-weight: bold;	
+}

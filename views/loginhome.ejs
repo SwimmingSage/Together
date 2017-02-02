@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Together</title>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+    <link rel='stylesheet' href='/stylesheets/loginhome.css' />
+    <link rel='stylesheet' href='/stylesheets/base.css' />
+    <script src="https://use.fontawesome.com/9ee4ba5902.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/loginhomepage.js"></script>
+    <script src="/javascripts/logoutajax.js"></script>
+  </head>
+
+
+    <body>
+
+    <div id="navbar">
+        <a href="/loginhome" id="together">Together</a>
+        <ul class="navbarButtons">
+          <li class="levelinfo" id="level">Lvl: <%= user.level %></li>
+          <li class="levelinfo" id="points"><%= user.points +" / "+ user.points_to_levelup+ " pts" %></li>
+          <a href="/yourgoals">
+            <li class="navButton">Your Goals</li>
+          </a>
+          <a href="/newgoal">
+            <li class="navButton">New Goal</li>
+          </a>
+          <a href="/joingoal">
+            <li class="navButton">Join Goal</li>
+          </a>
+          <button class="navButtonButton" id="logout">
+            <li class="navButton">Logout</li>
+          </button>
+        </ul>
+    </div>
+
+    <div class="header">
+      <p><%= "Welcome, " + user.firstname + ". You have made " + user.goals.length + " / 8 goals." %></p>
+    </div>
+
+    <div id="loginhomebody">
+      <a href="/newgoal">
+        <div id="newgoaldiv">
+          <h1>New Goal</h1>
+          <p>Begin a New Journey</p>
+        </div>
+      </a>
+      <a href="/yourgoals">
+        <div id="yourgoalsdiv">
+          <h1>Your Goals</h1>
+          <p>Resume Your Progress</p>
+        </div>
+      </a>
+      <br>
+      <a href="/joingoal">
+        <div id="joingoaldiv">
+          <h1>Join Another's Goal</h1>
+          <p>Journey With Another to Achieve Success</p>
+        </div>
+      </a>
+      </div>
+    </div>
+
+
+
+
+
+  </body>
+</html>

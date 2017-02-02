@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans");
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+body {
+	background-image: url('../images/toronto-small.jpg');
+  	background-size: cover;
+  	background-repeat: no-repeat;
+	background-attachment: fixed;
+	width: 100%;
+	height: 100vh;
+}
+
+
+/* Initial screen of joining a goal */
+#heading {
+	font-family: "Josefin Sans";
+	font-size: 60px;
+	text-align: center;
+	color:#ffc957;
+	margin: auto;
+	margin-top: 90px;
+	background-color: #444444;
+	opacity: 0.88;
+	padding: 10px 5px;
+	width: 900px;
+	border-bottom: solid 5px #ff6624;
+	cursor: default;
+	-webkit-box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+	box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+}
+
+.joingoalselect {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.joingoalselect ul{
+	list-style-type: none;
+	-webkit-padding-start: 0px;
+}
+
+.joingoalselect ul li{
+	padding: 40px 30px;
+	background-color: #444444;
+	opacity: 0.92;
+	width: 33vw;
+	font-size: 34px;
+	color: #ffc957;
+	font-family: "Rubik";
+	font-weight: bold;
+	margin: 15px 0px;
+	-webkit-box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+	box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+}
+
+.joingoalselect ul li:hover{
+	transform: scale(1.05);
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+#columnleft {
+	float:left;
+	margin-left: 10vw;
+}
+
+#columnright {
+	float:right;
+	margin-right: 10vw;
+}
+
+
+/* End of initial screen of joining a goal */
+
+
+/* goal bodies */
+
+.goalbodies {
+	cursor: default;
+	display: none;
+	opacity: 0;
+	background-color: #444444;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	text-align: center;
+	width: 700px;
+	-webkit-box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+	box-shadow: 0px 3px 28px 4px rgba(0,0,0,0.75);
+}
+
+.goalbodies .goback {
+	text-align: center;
+}
+
+.goalbodies button {
+  text-align: center;
+  background-color: #ffa834;
+  border-radius: 3px;
+  padding: 20px 10px;
+  margin: 20px 0px;
+  width: 280px;
+  font-family: "Rubik";
+  font-weight: bold;
+  font-size: 22px;
+  opacity: 1;
+}
+
+.goalbodies button:hover  {
+  transform: scale(1.05);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+
+.goalbodies p {
+	margin: 20px 5px;
+	margin-left:20px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ff6624;
+	background-color: #444444;
+	font-family: "Rubik";
+	font-weight: bold;
+	font-size: 24px;
+	font-weight: 300;
+	color: #ffa834;
+	text-align: left;
+}
+
+.goalbodies p span.right {
+	float: right;
+	font-family: "Rubik";
+	font-weight: bold;
+	color: #ff6624;
+	font-size: 20px;
+}
+
+.goalbodies p span i#othershowmore {
+	cursor: pointer;
+	color: #ffc957;
+}
+
+.goalbodies p span i#othershowmore:hover {
+	color: #ff6624;
+	transition: 0.20s;
+}
+
+.othertasks {
+	display: none;
+	opacity: 0;
+	border-bottom: 1px solid #ff6624;
+}
+
+div.bottomborder {
+	border-bottom: 1px solid #ff6624;
+	text-align: center
+}
+
+div.bottomborder p {
+	text-align: center;
+	border: none;
+	font-size: 20px;
+	font-family: "Rubik";
+	font-style: bold;
+	font-weight: 600;
+	margin: 3px 20px;
+}
+
+div.bottomborder p a {
+	text-decoration: underline;
+	color: #ffa834;
+	cursor: pointer;
+}
+
+div.bottomborder p a:hover {
+	color: #ff6624;
+}
+
+
+.othertasks i{
+	color: #ff6624;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+
+p.othertaskdone {
+	margin: 8px 0px;
+	margin-left: 10px;
+	font-size: 18px;
+	font-family: "Rubik";
+	color: #ffa834;
+	padding-left: 10px;
+	text-decoration: line-through;
+	cursor: default;
+	border:none;
+}
+
+p.othertask {
+	margin: 8px 0px;
+	margin-left: 10px;
+	font-size: 18px;
+	font-family: "Rubik";
+	color: #ffa834;
+	padding-left: 10px;
+	cursor: default;
+	border:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+body{
+ margin:0px;
+}
+a {
+  text-decoration: none;
+}
+button {
+	padding:0px;
+	border:none;
+	outline: none;
+}
+
+input {
+	outline: none;
+}
