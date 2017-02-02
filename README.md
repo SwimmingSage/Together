@@ -1,5 +1,5 @@
 # Together #
-## 6.148 Project by Matthew Woicik and John Matthews ##
+## 6.148 Project by Matthew Woicik(Programming and Ideation) and John Matthews(Testing and Ideation) ##
 ## Goal: ##
 A website that users can not only make goals on, but be motivated to achieve goals on. We allow users to make goals along with daily tasks to complete for those goals, daily tasks earning the users points, and after the user gains enough points they level up. In addition, users can also see the progress of others with a similar goal as them. Users can also browse other goals and add them if they decide that they like them. Users also have the option to edit the daily tasks that a goal entails whenever they want. 
 ## Citations: ##
